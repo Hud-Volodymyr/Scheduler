@@ -3,7 +3,10 @@ class Scheduler:
     def __init__(self, queue, queue_size, algorithm, tact_size):
         self.queue = queue
         self.queue_size = queue_size
-        self.algorithm = 'FIFO'
+        if algorithm != 'FIFO':
+            self.algorithm = algorithm
+        else:
+            self.algorithm = 'FIFO'
         self.tact_size = tact_size
         self.stats = {
             'avg_wait_time': 0,

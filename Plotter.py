@@ -4,7 +4,9 @@ from SMO import Scheduler
 import matplotlib.pyplot as plt
 
 
-AVG_SOLUTION = 0.045
+AVG_SOLUTION_1 = 0.045
+AVG_SOLUTION_2 = 0.09
+AVG_SOLUTION_3 = 0.2
 QUEUE_SIZE = 100
 intensities = np.linspace(0.1, 30)
 tact_size = 1
@@ -16,7 +18,10 @@ def plot_stats(algorithm):
     stats_avg_queue_length = []
     for i in intensities:
         generator = Generator(i, QUEUE_SIZE)
-        scheduler = Scheduler(generator.generate_queue(AVG_SOLUTION), QUEUE_SIZE, algorithm, tact_size)
+        queue = generator.generate_queue(AVG_SOLUTION_1, AVG_SOLUTION_2, AVG_SOLUTION_3)
+        scheduler = Scheduler(
+            queue, QUEUE_SIZE, algorithm, tact_size
+        )
         stats = scheduler.schedule
         stats_wait_time.append(stats['avg_wait_time'])
         stats_free_time.append(stats['free_time'])
