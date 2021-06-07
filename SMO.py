@@ -1,14 +1,9 @@
-from EarliestDeadlineFirst import EDF
-
 
 class Scheduler:
     def __init__(self, queue, queue_size, algorithm, tact_size):
         self.queue = queue
         self.queue_size = queue_size
-        if algorithm.__name__ in ['EDF', 'RM']:
-            self.algorithm = algorithm
-        else:
-            self.algorithm = EDF
+        self.algorithm = 'FIFO'
         self.tact_size = tact_size
         self.stats = {
             'avg_wait_time': 0,
@@ -42,7 +37,8 @@ class Scheduler:
                 self.stats['queue_length'].append(len(self.rt_queue))
             if self.processing == 0:
                 # if no task is processed sort tasks in queue according to algorithm
-                self.rt_queue = self.algorithm.sort_tasks(self.rt_queue)
+                if self.algorithm != 'FIFO':
+                    self.rt_queue = self.algorithm.sort_tasks(self.rt_queue)
             if len(self.rt_queue) != 0:
                 if self.remainder_tact_time != 0:
                     if self.rt_queue[0].wcet > self.remainder_tact_time:

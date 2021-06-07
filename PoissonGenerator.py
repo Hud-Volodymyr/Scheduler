@@ -15,7 +15,7 @@ class Generator:
             tact = []
             for j in range(self.poisson[i]):
                 margin = r.uniform(solution_time * 0.2, solution_time * 0.4) / 2
-                if r.random() < 0.5:  # Erlang flow takes every second task
+                if r.random() < 0.5:
                     tact.append(Task(i, solution_time + margin, i + (solution_time + margin) + r.randint(4, 10)))
                 else:
                     tact.append(Task(i, solution_time - margin, i + (solution_time - margin) + r.randint(4, 10)))

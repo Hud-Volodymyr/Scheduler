@@ -23,7 +23,10 @@ def plot_stats(algorithm):
         stats_avg_queue_length.append(stats['avg_queue_length'])
 
     fig = plt.figure(figsize=(11, 7))
-    fig.suptitle(algorithm.__name__)
+    if algorithm != 'FIFO':
+        fig.suptitle(algorithm.__name__)
+    else:
+        fig.suptitle('FIFO')
     plot = fig.add_subplot(311)
     plot.set_title('Час очікування від інтенсивності')
     plot.set_xlabel('Інтенсивність')
