@@ -5,9 +5,9 @@ from Task import Task
 
 class Generator:
     def __init__(self, intensity, tact_number):
-        self.poisson_1 = np.random.poisson(intensity / 2, tact_number)
-        self.poisson_2 = np.random.poisson(intensity / 4, tact_number)
-        self.poisson_3 = np.random.poisson(intensity / 6, tact_number)
+        self.poisson_1 = np.random.poisson(intensity * 0.5, tact_number)
+        self.poisson_2 = np.random.poisson(intensity * 0.3, tact_number)
+        self.poisson_3 = np.random.poisson(intensity * 0.2, tact_number)
         self.intensity = intensity
         self.queue_size = tact_number
 
