@@ -14,7 +14,7 @@ class Scheduler:
             'free_time': 0,
             'avg_queue_length': 0,
             'queue_length': [],
-            'discarded': []
+            'discarded': 0
         }
         self.rt_queue = []
         self.sys_clock = 0
@@ -29,7 +29,7 @@ class Scheduler:
                 # discard tasks with expired deadline
                 self.rt_queue = [task for task in self.rt_queue if task.deadline > self.sys_clock]
                 filtered = len(self.rt_queue)
-                self.stats['discarded'].append(all_tasks - filtered)
+                self.stats['discarded'] += all_tasks - filtered
             if len(self.rt_queue) == 0 and len(self.queue) == 0:
                 # if all tasks complete break the loop
                 break
@@ -87,6 +87,7 @@ class Scheduler:
                     self.stats['free_time'] += self.tact_size
 
         print(self.stats)
+
 
         self.stats['avg_wait_time'] = (self.stats['avg_wait_time'] / self.stats['complete'])
         self.stats['avg_queue_length'] = sum(self.stats['queue_length']) / self.queue_size
